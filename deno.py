@@ -1,0 +1,1 @@
+print("tao đẹp trai")
