@@ -11,7 +11,7 @@ pipeline {
 
         stage('Run Unit Tests (Python)') {
             steps {
-                sh 'python3 -m unittest -v'
+                sh 'python3 -m unittest -v unit_test.py'
             }
         }
 
