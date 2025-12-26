@@ -9,5 +9,6 @@ COPY . .
 # Cài dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
+EXPOSE 5000
 # Lệnh mặc định: chạy unit test
-CMD ["pytest", "-q"]
+CMD ["python3", "app.py"]

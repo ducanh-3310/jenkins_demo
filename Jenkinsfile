@@ -2,35 +2,41 @@ pipeline {
     agent any
 
     stages {
-        stage('Checkout Code') {
+
+        stage('Checkout Source Code') {
             steps {
                 checkout scm
             }
         }
 
-        stage('Build Docker image') {
+        stage('Run Unit Tests (Python)') {
             steps {
-                script {
-                    sh 'docker build -t py-app .'
-                }
+                sh 'python3 -m unittest -v'
             }
         }
 
-        stage('Run Unit Tests in Docker') {
+        stage('Build Docker Image') {
             steps {
-                script {
-                    sh 'docker run --rm py-app'
-                }
+                sh 'docker build -t py-app .'
+            }
+        }
+
+        stage('Run Docker Image') {
+            steps {
+                sh '''
+                docker rm -f py-app-container || true
+                docker run -d -p 8080:5000 --name py-app-container py-app
+                '''
             }
         }
     }
 
     post {
         success {
-            echo '🎉 CI PASSED — Build và test thành công!'
+            echo '🎉 SUCCESS: Pipeline completed'
         }
         failure {
-            echo '❌ CI FAILED — Kiểm tra lại code hoặc test!'
+            echo '❌ FAILED: Pipeline error, check logs'
         }
     }
 }
