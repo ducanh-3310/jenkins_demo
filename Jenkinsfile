@@ -25,7 +25,7 @@ pipeline {
             steps {
                 sh '''
                 docker rm -f py-app-container || true
-                docker run -d -p 8080:5000 --name py-app-container py-app
+                docker run -d -p 8088:5000 --name py-app-container py-app
                 '''
             }
         }
