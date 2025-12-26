@@ -17,7 +17,7 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                sh 'docker build -t py-app .'
+                sh 'docker build --no-cache -t py-app .'
             }
         }
 
