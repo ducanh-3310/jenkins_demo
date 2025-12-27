@@ -5,7 +5,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
-    return "Calculator Web API is running!!!ahihhi1 chút"
+    return "Calculator Web API is running"
 
 @app.route('/add')
 def add():
